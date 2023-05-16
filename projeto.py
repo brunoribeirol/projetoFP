@@ -32,3 +32,5 @@ def categoria():
     casa = float("Quanto você gasta em sua casa? ") 
     transporte = float("Quanto você gasta em transporte? ")
     comida = float("Quanto você gasta em alimentação? ") 
+
+print("gasta menos sua puta")
