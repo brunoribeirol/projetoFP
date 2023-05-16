@@ -26,7 +26,7 @@ REQUISITOS NÃO FUNCIONAIS:
 
 
 def categoria():
-    casa = {}
+    casa = {'higiene': 'papel higiênico, escova de dente'}
     transporte = {}
     comida = {}
     casa = float("Quanto você gasta em sua casa? ") 
