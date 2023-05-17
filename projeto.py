@@ -27,11 +27,10 @@ REQUISITOS NÃO FUNCIONAIS:
 import os
 os.system("clear")
 
-def adicionar_receita(arquivo):
-            
-            valor = float(input("Digite o valor da receita: "))
-            categoria = input("Digite a categoria da receita: ")
-            arquivo.write(f'Receita,{valor},{categoria}')
+def adicionar_receita(tipo, valor, categoria):
+            with open('./projeto/transacoes.csv', 'a', newline='') as arquivo:
+                arquivo.write(f'{tipo},{valor},{categoria}')
+            print('Nova transação adicionada com sucesso.')
 
 arquivo = open('./projeto/transacoes.csv', 'r+')
 
@@ -39,22 +38,25 @@ decisao = input('Deseja inserir alguma transação? [S]/[N]\n--> ').upper()
 
 while decisao == 'S':
     os.system("clear")
-    opcao = input('Selecione a opção desejada:\n[R]eceita;\n[D]espesa;\n[R]emover transação.\n--> ').upper()
+    opcao = input('Selecione a opção desejada:\n[R]eceita;\n[D]espesa;\n[E]xcluir.\n--> ').upper()
 
     if opcao == 'R':
-        adicionar_receita(arquivo)
+        tipo = 'Receita'
+        valor_transacao = float(input('Digite o valor da receita: '))
+        categoria_transacao = input('Digite a categoria da receita: ')
+        adicionar_receita(tipo, valor_transacao, categoria_transacao)
     
     decisao = input('Deseja inserir alguma transação? [S]/[N]\n--> ').upper()
     print(arquivo.read())
     arquivo.close()
 
 
-def categoria():
-    casa = {'higiene': 'papel higiênico, escova de dente'}
-    transporte = {}
-    comida = {}
-    casa = float("Quanto você gasta em sua casa? ") 
-    transporte = float("Quanto você gasta em transporte? ")
-    comida = float("Quanto você gasta em alimentação? ") 
-
-print("gasta menos sua puta")
+# def categoria():
+    # casa = {'higiene': 'papel higiênico, escova de dente'}
+    # transporte = {}
+    # comida = {}
+    # casa = float("Quanto você gasta em sua casa? ") 
+    # transporte = float("Quanto você gasta em transporte? ")
+    # comida = float("Quanto você gasta em alimentação? ") 
+# 
+# print("gasta menos sua puta")
