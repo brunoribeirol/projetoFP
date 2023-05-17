@@ -24,6 +24,30 @@ REQUISITOS NÃO FUNCIONAIS:
         a. Fiquem à vontade para escolher como será feito esse manual. Pode ser um pdf, site, vídeo, carta...
 '''
 
+import os
+os.system("clear")
+
+def adicionar_receita(arquivo):
+            
+            valor = float(input("Digite o valor da receita: "))
+            categoria = input("Digite a categoria da receita: ")
+            arquivo.write(f'Receita,{valor},{categoria}')
+
+arquivo = open('./projeto/transacoes.csv', 'r+')
+
+decisao = input('Deseja inserir alguma transação? [S]/[N]\n--> ').upper()
+
+while decisao == 'S':
+    os.system("clear")
+    opcao = input('Selecione a opção desejada:\n[R]eceita;\n[D]espesa;\n[R]emover transação.\n--> ').upper()
+
+    if opcao == 'R':
+        adicionar_receita(arquivo)
+    
+    decisao = input('Deseja inserir alguma transação? [S]/[N]\n--> ').upper()
+    print(arquivo.read())
+    arquivo.close()
+
 
 def categoria():
     casa = {'higiene': 'papel higiênico, escova de dente'}
