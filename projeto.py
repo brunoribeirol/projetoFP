@@ -1,4 +1,4 @@
-print("Olá Natália! Seja bem-vinda ao seu rastreador de despesas pessoais")
+print("Olá Natália! Seja bem-vinda ao seu rastreador de despesas pessoais.\n")
 
 ''''
 REQUISITOS FUNCIONAIS:
@@ -25,38 +25,95 @@ REQUISITOS NÃO FUNCIONAIS:
 '''
 
 import os
-os.system("clear")
+os.system('clear')
 
-def adicionar_receita(tipo, valor, categoria):
-            with open('./projeto/transacoes.csv', 'a', newline='') as arquivo:
-                arquivo.write(f'{tipo},{valor},{categoria}')
-            print('Nova transação adicionada com sucesso.')
+transacoes = {'Casa': 0,
+              'Comida': 0,
+              'Transporte': 0,
+              'Salário': 0}
 
-arquivo = open('./projeto/transacoes.csv', 'r+')
+def pede_categoria():
+    return input('Categoria: ').title()
+def pede_valor():
+    return input('Valor: ') 
+def pede_nome_arquivo():
+    return input('Nome do arquivo: ') #Precisamos pensar em uma forma mais fácil para o usuário
+def novo():
+    global transacoes
+    opcao = input('Desja inserir nova\n[c]ategoria\n[v]alor:\n-->').lower()
+    if opcao == 'v':
+        valor = pede_valor()
+        categoria = pede_categoria()
+        transacoes[categoria] += float(valor)
+    elif opcao == 'c':
+        nova_categoria = pede_categoria()
+        transacoes[nova_categoria] = pede_valor()
+    else: 
+        print('Digite uma opção válida: ')
 
-decisao = input('Deseja inserir alguma transação? [S]/[N]\n--> ').upper()
+def grava():
+    nome_arquivo = pede_nome_arquivo()
+    with open(nome_arquivo, 'w', encoding='utf-8') as arquivo:
+        for categoria, total in transacoes.items():
+            arquivo.write(f'{categoria} {total} \n')
+def lista():
+        categorias = list(transacoes.keys())
+        valores = list(transacoes.values())
 
-while decisao == 'S':
-    os.system("clear")
-    opcao = input('Selecione a opção desejada:\n[R]eceita;\n[D]espesa;\n[E]xcluir.\n--> ').upper()
+# Imprimir o cabeçalho da tabela
+        for categoria in categorias:
+            print('{:<20}'.format(categoria), end='')
+        print()
 
-    if opcao == 'R':
-        tipo = 'Receita'
-        valor_transacao = float(input('Digite o valor da receita: '))
-        categoria_transacao = input('Digite a categoria da receita: ')
-        adicionar_receita(tipo, valor_transacao, categoria_transacao)
-    
-    decisao = input('Deseja inserir alguma transação? [S]/[N]\n--> ').upper()
-    print(arquivo.read())
-    arquivo.close()
-
-
-# def categoria():
-    # casa = {'higiene': 'papel higiênico, escova de dente'}
-    # transporte = {}
-    # comida = {}
-    # casa = float("Quanto você gasta em sua casa? ") 
-    # transporte = float("Quanto você gasta em transporte? ")
-    # comida = float("Quanto você gasta em alimentação? ") 
+# Imprimir o separador entre o cabeçalho e as linhas de dados
+        for _ in range(len(categorias)):
+            print('-'*20, end='')
+        print()
 # 
-# print("gasta menos sua puta")
+# Imprimir as linhas de dados
+        # for linha in transacoes.values():
+            # print()
+            # for coluna in range(len(categorias)):
+                # print('{:<20}'.format(valores[coluna][linha]), end='')
+        # print()
+
+
+def valida_faixa_inteiro(pergunta, inicio, fim):
+    while True:
+        try:
+            valor = int(input(pergunta))
+            if inicio <= valor <= fim:
+                return valor
+        except ValueError:
+            print(f'Valor inválido, favor digitar entre {inicio} e {fim}')
+# função novo criada
+# colocar função para apagar a última função realizada, caso o usuário erre
+# colocar função para ler uma categoria específica
+
+def menu():
+    print('''
+    1 - Novo 
+    2 - Altera
+    3 - Apaga
+    4 - Lista
+    5 - Grava
+    6 - Lê
+    
+    0 - Sai
+    ''') 
+    return valida_faixa_inteiro("Escolha uma opção: ", 0, 5)
+
+while True:
+    opcao = menu()
+    if opcao == 0:
+        break
+    elif opcao == 1:
+        novo()
+    elif opcao == 4:
+        lista()
+    elif opcao == 5:
+        grava()
+    else:
+        continue
+
+# Não consegui imprimir os valores do dicionário como tabela, por favor, tentem modificar - opção '4'
