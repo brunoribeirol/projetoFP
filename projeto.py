@@ -1,5 +1,3 @@
-print("Olá Natália! Seja bem-vinda ao seu rastreador de despesas pessoais.\n")
-
 ''''
 REQUISITOS FUNCIONAIS:
     1. O sistema deve ser baseado em transações, que guardam (pelo menos) informações sobre o nome, uma categoria (exemplo: Casa, comida, transporte, etc...) e a quantidade de dinheiro envolvida. Vale lembrar que o sistema deve rastrear entradas e saídas de dinheiro!
@@ -26,6 +24,8 @@ REQUISITOS NÃO FUNCIONAIS:
 
 import os
 os.system('clear')
+
+print("Olá Natália! Seja bem-vinda ao seu rastreador de despesas pessoais.\n")
 
 transacoes = {'Casa': 0,
               'Comida': 0,
