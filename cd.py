@@ -29,53 +29,78 @@ REQUISITOS NÃO FUNCIONAIS:
 
 import os
 os.system('clear')
+indices=[0] ##INDICE 0 SÃO OS TÍTULOS DA COLUNA
+nomes=["Nomes"]
+categorias=["Categorias"]
+valores=["Valores"]
+menu_categoria={"indice": indices, 'nome': nomes, 'categoria': categorias, 'valor': valores}
 
-menu_categoria={'nome': ["redbull", "almoço"], 'categoria': ["comida", "comida"], 'valor': [8, 40]}
+##LER O ARQUIVO COM LAÇO FOR
+file=open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "r", encoding="utf8")
+for linhas in file:
+    transacoes_existentes=linhas.split(",") #TRANSACOES_EXISTENTE É UMA LISTA EM QUE CADA ITEM É UM ELEMENTO DA TRANSACAO
+    indices.append(transacoes_existentes[0])
+    nomes.append(transacoes_existentes[1])
+    categorias.append(transacoes_existentes[2])
+    valores.append(transacoes_existentes[3])
+file.close()
 
+def det_indice(): ##DETERMINA O ÍNDICE DA PRÓXIMA LINHA
+    return len(indices)
+def pede_nome():
+    return str(input('Nome: '))
 def pede_categoria():
     return input('Categoria: ').title()
 def pede_valor():
-    return input('Valor: ')
-def pede_nome():
-    return input('Nome: ') 
+    return float(input('Valor: '))
 
-def adicao():
-    global transacoes
-    opcao = input('Deseja inserir nova\n[c]ategoria\n[v]alor:\n-->').lower()
-    if opcao == 'v':
-        nome = pede_nome()
-        valor = pede_valor()
-        categoria = pede_categoria()
-        transacoes[categoria] += float(valor)
-    elif opcao == 'c':
-        nova_categoria = pede_categoria()
-        menu_categoria[nova_categoria] = pede_valor()
-    else: 
-        print('Digite uma opção válida: ')
+def adicao(): ##FUNÇÃO 1 -> ADICIONA UMA TRANSAÇÃO NO FIM DO ARQUIVO
+    indice_novo=det_indice()
+    nome_novo = pede_nome()
+    valor_novo = pede_valor()
+    categoria_nova = pede_categoria()
+
+    indices.append(indice_novo)
+    nomes.append(nome_novo)
+    categorias.append(categoria_nova)
+    valores.append(valor_novo)
+    file=open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w+")
+    for i in range (0, len(indices)):
+        file.write(str(indices[i]) +","+ nomes[i] +","+ categorias[i] +","+ str(valores[i])+"\n")
+    file.close() 
 
 def apaga():
-    global transacoes
-    for categoria, valor in transacoes.items():
-        print(f'{categoria} --> R$ {valor}')
-    p = pede_categoria()
-    if p in transacoes.keys():
-        transacoes.pop(p)
-    else:
-        print('Categoria não encontrada.')
-def grava():
-    with open('./projeto/transacoes.csv', 'w', encoding='utf-8') as arquivo:
-        for categoria, total in transacoes.items():
-            arquivo.write(f'{categoria} {total} \n')
+    file=open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w+", encoding="utf8")
+    print("Digite o nome da transação que deseja apagar")
+    nome_apagar = pede_nome()
+    indice_apagar=nomes.index(nome_apagar)
+    transacoes=file.readlines()
+    for i in range(len(transacoes)):
+        transacoes[i]=transacoes[i].split()
+        if nome_apagar in transacoes[i]:
+            indices.pop(indice_apagar)
+            nomes.pop(indice_apagar)
+            categorias.pop(indice_apagar)
+            valores.pop(indice_apagar)
+        for i in range (0, len(indices)):
+            file.write(str(indices[i]) +","+ nomes[i] +","+ categorias[i] +","+ str(valores[i])+"\n")
+        else:
+            print("Transação não existe")
+    file.close()
+    file=open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w+")
+    for i in range (0, len(indices)):
+        file.write(str(indices[i]) +","+ nomes[i] +","+ categorias[i] +","+ str(valores[i])+"\n")
+    file.close()
 
-
+'''
 # Imprimir o cabeçalho da tabela
-        for categoria in categorias:
-            print('{:<20}'.format(categoria), end='')
-        print()
+        #for categoria in categorias:
+            #print('{:<20}'.format(categoria), end='')
+        #print()
 
 # Imprimir o separador entre o cabeçalho e as linhas de dados
-        for _ in range(len(categorias)):
-            print('-'*20, end='')
+    for _ in range(len(categorias)):
+        print('-'*20, end='')
         print()
 # 
 # Imprimir as linhas de dados
@@ -84,8 +109,7 @@ def grava():
             # for coluna in range(len(categorias)):
                 # print('{:<20}'.format(valores[coluna][linha]), end='')
         # print()
-
-
+'''
 def valida_faixa_inteiro(pergunta, inicio, fim):
     while True:
         try:
@@ -106,8 +130,6 @@ def menu_funcao():
     2 - Atualização
     3 - Deleção
     4 - Leitura
-    5 - Gravar no Arquivo
-    
     
     0 - Sai
     ''') 
@@ -118,13 +140,7 @@ while True:
         break
     elif opcao == 1:
         adicao()
-    elif opcao == 2:
-        altera()
     elif opcao == 3:
         apaga()
-    elif opcao == 4:
-        leitura()
-    elif opcao == 5:
-        grava()
     else:
         continue

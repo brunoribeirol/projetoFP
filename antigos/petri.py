@@ -27,7 +27,7 @@ REQUISITOS NÃO FUNCIONAIS:
 casa={}; comida={}; transporte={}; lazer={}; ganhos={}
 menu={1:casa, 2:comida, 3:transporte, 4:lazer, 5:ganhos}
 
-def adicao():
+#def adicao():
     
 
 import os
@@ -37,14 +37,8 @@ print("Olá Natália! Seja bem-vinda ao seu rastreador de despesas pessoais.\n")
 file=open("petri.csv", "a+")
 
 def adicao():
-    file.write("\n"+map(input()))
+    nova_linha=file.write("\n"+map(input()))
     return nova_linha
 file.seek(0)
 lines=file.read()
 print(lines)
-
-
-key=input()
-if key in menu:
-
-
