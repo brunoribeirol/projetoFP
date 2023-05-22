@@ -27,7 +27,7 @@ os.system('clear')
 
 
 casa={}; comida={}; transporte={}; lazer={}; ganhos={}
-menu_categoria={'nome': [], 'categoria': [], 'valor': []}
+menu_categoria={'nome': ["redbull", "almoço"], 'categoria': ["comida", "comida"], 'valor': [8, 40]}
 
 def pede_categoria():
     return input('Categoria: ').title()
