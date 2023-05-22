@@ -120,17 +120,18 @@ os.system("clear")
 
 def menu():
     print('''
-    1 - Novo 
-    2 - Altera
-    3 - Apaga
-    4 - Lista
-    5 - Grava
-    6 - Lê
+    \t\t-----MENU-----:
+    \t\t1 - Novo 
+    \t\t2 - Altera
+    \t\t3 - Apaga
+    \t\t4 - Lista
+    \t\t5 - Grava
+    \t\t6 - Lê
     
     
-    0 - Sai
+    \t\t0 - Sai
     ''') 
-    return valida_faixa_inteiro("Escolha uma opção: ", 0, 5)
+    return valida_faixa_inteiro("\t\tEscolha uma opção: ", 0, 5)
 while True:
     opcao = menu()
     if opcao == 0:
