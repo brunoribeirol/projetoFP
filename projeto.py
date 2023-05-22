@@ -25,33 +25,28 @@ REQUISITOS NÃO FUNCIONAIS:
 import os
 os.system('clear')
 
-print("Olá Natália! Seja bem-vinda ao seu rastreador de despesas pessoais.\n")
 
-import os
-os.system('clear')
-
-transacoes = {'Casa': 0,
-              'Comida': 0,
-              'Transporte': 0,
-              'Salário': 0}
+casa={}; comida={}; transporte={}; lazer={}; ganhos={}
+menu_categoria={1:casa, 2:comida, 3:transporte, 4:lazer, 5:ganhos}
 
 def pede_categoria():
     return input('Categoria: ').title()
 def pede_valor():
-    return input('Valor: ') 
-def pede_nome_arquivo():
-    return input('Nome do arquivo: ') #Precisamos pensar em uma forma mais fácil para o usuário
+    return input('Valor: ')
+def pede_nome():
+    return input('Nome: ') 
 
-def novo():
+def adicao():
     global transacoes
     opcao = input('Desja inserir nova\n[c]ategoria\n[v]alor:\n-->').lower()
     if opcao == 'v':
+        nome = pede_nome()
         valor = pede_valor()
         categoria = pede_categoria()
         transacoes[categoria] += float(valor)
     elif opcao == 'c':
         nova_categoria = pede_categoria()
-        transacoes[nova_categoria] = pede_valor()
+        menu_categoria[nova_categoria] = pede_valor()
     else: 
         print('Digite uma opção válida: ')
 
@@ -78,13 +73,12 @@ def apaga():
     else:
         print('Categoria não encontrada.')
 def grava():
-    nome_arquivo = pede_nome_arquivo()
-    with open(nome_arquivo, 'w', encoding='utf-8') as arquivo:
+    with open('./projeto/transacoes.csv', 'w', encoding='utf-8') as arquivo:
         for categoria, total in transacoes.items():
             arquivo.write(f'{categoria} {total} \n')
-def lista():
-        categorias = list(transacoes.keys())
-        valores = list(transacoes.values())
+def leitura():
+        categorias = list(menu_categoria.values())
+        # valores = list(transacoes.values())
 
 # Imprimir o cabeçalho da tabela
         for categoria in categorias:
@@ -118,34 +112,31 @@ def valida_faixa_inteiro(pergunta, inicio, fim):
 
 os.system("clear")
 
-def menu():
+def menu_funcao():
     print('''
-    \t\t-----MENU-----:
-    \t\t1 - Novo 
-    \t\t2 - Altera
-    \t\t3 - Apaga
-    \t\t4 - Lista
-    \t\t5 - Grava
-    \t\t6 - Lê
+    1 - Adicao
+    2 - Atualização
+    3 - Deleção
+    4 - Leitura
+    5 - Gravar no Arquivo
     
     
-    \t\t0 - Sai
+    0 - Sai
     ''') 
-    return valida_faixa_inteiro("\t\tEscolha uma opção: ", 0, 5)
+    return valida_faixa_inteiro("Escolha uma opção: ", 0, 5)
 while True:
-    opcao = menu()
+    opcao = menu_funcao()
     if opcao == 0:
         break
     elif opcao == 1:
-        novo()
+        adicao()
     elif opcao == 2:
         altera()
     elif opcao == 3:
         apaga()
     elif opcao == 4:
-        lista()
+        leitura()
     elif opcao == 5:
         grava()
     else:
         continue
-# Não consegui imprimir os valores do dicionário como tabela, por favor, tentem modificar - opção '4'
