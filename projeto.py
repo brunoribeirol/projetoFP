@@ -26,13 +26,8 @@ import os
 os.system('clear')
 
 
-import os
-os.system('clear')
-
-transacoes = {'Casa': 0,
-              'Comida': 0,
-              'Transporte': 0,
-              'Salário': 0}
+casa={}; comida={}; transporte={}; lazer={}; ganhos={}
+menu_categoria={1:casa, 2:comida, 3:transporte, 4:lazer, 5:ganhos}
 
 def pede_categoria():
     return input('Categoria: ').title()
@@ -115,20 +110,18 @@ def valida_faixa_inteiro(pergunta, inicio, fim):
 # colocar função para apagar a última função realizada, caso o usuário erre
 # colocar função para ler uma categoria específica
 
-
+os.system("clear")
 
 def menu_funcao():
     print('''
-    \t\t-----MENU-----:
-    \t\t1 - Novo 
-    \t\t2 - Altera
-    \t\t3 - Apaga
-    \t\t4 - Lista
-    \t\t5 - Grava
-    \t\t6 - Lê
+    1 - Adicao
+    2 - Atualização
+    3 - Deleção
+    4 - Leitura
+    5 - Gravar no Arquivo
     
     
-    \t\t0 - Sai
+    0 - Sai
     ''') 
     return valida_faixa_inteiro("Escolha uma opção: ", 0, 5)
 while True:
