@@ -27,8 +27,6 @@ os.system('clear')
 
 print("Olá Natália! Seja bem-vinda ao seu rastreador de despesas pessoais.\n")
 
-import os
-os.system('clear')
 
 transacoes = {'Casa': 0,
               'Comida': 0,
@@ -116,7 +114,7 @@ def valida_faixa_inteiro(pergunta, inicio, fim):
 # colocar função para apagar a última função realizada, caso o usuário erre
 # colocar função para ler uma categoria específica
 
-os.system("clear")
+
 
 def menu():
     print('''
