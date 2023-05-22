@@ -41,7 +41,7 @@ def pede_nome():
 
 def adicao():
     global transacoes
-    opcao = input('Desja inserir nova\n[c]ategoria\n[v]alor:\n-->').lower()
+    opcao = input('Deseja inserir nova\n[c]ategoria\n[v]alor:\n-->').lower()
     if opcao == 'v':
         nome = pede_nome()
         valor = pede_valor()
