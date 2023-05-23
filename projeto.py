@@ -26,17 +26,22 @@ import os
 os.system('clear')
 
 
-casa={}; comida={}; transporte={}; lazer={}; ganhos={}
-menu_categoria={'nome': ["redbull", "almoço"], 'categoria': ["comida", "comida"], 'valor': [8, 40]}
+import os
+os.system('clear')
+
+transacoes = {'Casa': 0,
+              'Comida': 0,
+              'Transporte': 0,
+              'Salário': 0}
 
 def pede_categoria():
     return input('Categoria: ').title()
 def pede_valor():
-    return input('Valor: ')
-def pede_nome():
-    return input('Nome: ') 
+    return input('Valor: ') 
+def pede_nome_arquivo():
+    return input('Nome do arquivo: ') #Precisamos pensar em uma forma mais fácil para o usuário
 
-def adicao():
+def novo():
     global transacoes
     opcao = input('Deseja inserir nova\n[C]ategoria\n[V]alor:\n-->').lower()
     if opcao == 'v':
@@ -50,28 +55,6 @@ def adicao():
     else: 
         print('Digite uma opção válida: ')
 
-def altera():
-    global transacoes
-    for categoria, valor in transacoes.items():
-        print(f'{categoria} --> R$ {valor}')
-
-    p = pede_categoria()
-    if p in transacoes.keys():
-        print('A alteração apagará o valor anterior.')
-        transacoes[p] = pede_valor()
-
-    else:
-        print('Categoria não encontrada.\nAperte 1 para nova categoria.')
-        
-def apaga():
-    global transacoes
-    for categoria, valor in transacoes.items():
-        print(f'{categoria} --> R$ {valor}')
-    p = pede_categoria()
-    if p in transacoes.keys():
-        transacoes.pop(p)
-    else:
-        print('Categoria não encontrada.')
 def grava():
     with open('./projeto/transacoes.csv', 'w', encoding='utf-8') as arquivo:
         for categoria, total in transacoes.items():
@@ -112,24 +95,26 @@ def valida_faixa_inteiro(pergunta, inicio, fim):
 
 os.system("clear")
 
-def menu_funcao():
+def menu():
     print('''
-    1 - Adicao
-    2 - Atualização
-    3 - Deleção
-    4 - Leitura
-    5 - Gravar no Arquivo
+    1 - Novo 
+    2 - Altera
+    3 - Apaga
+    4 - Lista
+    5 - Grava
+    6 - Lê
     
     
     0 - Sai
     ''') 
     return valida_faixa_inteiro("Escolha uma opção: ", 0, 5)
+
 while True:
     opcao = menu_funcao()
     if opcao == 0:
         break
     elif opcao == 1:
-        adicao()
+        novo()
     elif opcao == 2:
         altera()
     elif opcao == 3:
@@ -140,3 +125,4 @@ while True:
         grava()
     else:
         continue
+# Não consegui imprimir os valores do dicionário como tabela, por favor, tentem modificar - opção '4'
