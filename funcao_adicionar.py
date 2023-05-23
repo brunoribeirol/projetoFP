@@ -54,4 +54,4 @@ def adicao():
     categoria=input()
     valor=float(input())
     transacao={"nome": nome, "categoria": categoria, "valor": valor}
-    transacoes.append(transacao)
+    planilha.append(transacao)
