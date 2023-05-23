@@ -1,15 +1,40 @@
 #CADA TRANSAÇÃO É UM DICIONARIO, DENTRO DE UMA LISTA DE TRASACOES
-transacoes=[{"nome": "uber", "categoria": "transporte", "valor": 30 }, {"nome": "racao", "categoria": "casa", "valor": 60,}]
+planilha=[{"nome": "uber", "categoria": "transporte", "valor": 30 }, {"nome": "racao", "categoria": "casa", "valor": 60,}]
 #NOVA TRANSACAO (EX)
-transacao={"nome": "input", "categoria": "input", "valor": "input"}
+transacao={"nome": "uber", "categoria": "transporte", "valor": "input"}
 #PRA ADICONAR NOVO, FAZ ALGO ASSIM
-transacoes.append(transacao)
-
+planilha.append(transacao)
+planilha=[]
 #######################funcao read
-def lerArquivo():
-    file=open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "r", encoding="utf8")
-    linhas=file.readlines().split()
-    transacao={"nome":}
+def ler():
+    global planilha
+    try:
+        with open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "r") as file:
+            linhas=file.readlines() #TODAS AS LINHAS VIRAM UM ITEM DE UMA LISTA
+            for linha in linhas[1:]: #????  1 NAO PEGA O "TITULO" DO ARQUIVO
+                itens=linha.strip().split(",") #ITENS = LISTA QUE TEM OS DADOS DE CADA TRANSAÇÃO
+                transacao={"nome": itens[0], "categoria": itens[1], "valor": float(itens[2])} #PEGA CADA TRANSACAO E ADICIONA NO DICIONARIO
+                planilha.append(transacao)
+    except FileNotFoundError:
+        pass #PESQUISAR SOBRE (BREAK SO FUNCIONA DENTRO DO WHILE, COMO É UMA FUNCAO QUE VAI SER CHAMADA NAS OUTRAS, NAO PRECISA DO WHILE)
+
+    return planilha
+
+def armazena(planilha): #TRANSFORMAR O DICIONARIO TRANSACAO EM UM STRING LINHA 
+    with open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w") as file:
+        cabecalho=["Nome", "Categoria", "Valor"]
+        titulos=",".join(cabecalho) #ARMAZENA O CABECALHO COMO STRING, SEPARADO POR VIRGULA
+        file.write(titulos+"\n")
+
+        
+        for i, transacao in enumerate(planilha):
+            itens=[]
+            for dados in transacao.values():
+                itens.append(str(dados))
+                linha = ','.join(itens)
+            file.write(linha+"\n")
+
+        
 
 '''
 for linhas in file:
@@ -21,14 +46,10 @@ for linhas in file:
 file.close()
 '''
 ##############################funcao write
-def escrever():
-    file=open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w+", encoding="utf8")
-    transacoes=[]
-    for i in transacoes:
-        file.write(i)
+
 #############################funcao add
 def adicao():
-    lerArquivo()
+    ler()
     nome=input()
     categoria=input()
     valor=float(input())
