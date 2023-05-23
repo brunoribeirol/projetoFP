@@ -35,6 +35,14 @@ categorias=["Categorias"]
 valores=["Valores"]
 menu_categoria={"indice": indices, 'nome': nomes, 'categoria': categorias, 'valor': valores}
 
+
+#CADA TRANSAÇÃO É UM DICIONARIO, DENTRO DE UMA LISTA DE TRASACOES
+transacoeS=[{"nome": "uber", "valor": 30, "categoria": "transporte"}, {"nome": "racao", "valor": 60, "categoria": "casa"}]
+#NOVA TRANSACAO (EX)
+transacao={"nome": "input", "categoria": "input", "valor": "input"}
+#PRA ADICONAR NOVO, FAZ ALGO ASSIM
+transacoeS.append(transacao)
+
 ##LER O ARQUIVO COM LAÇO FOR
 file=open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "r", encoding="utf8")
 for linhas in file:
@@ -85,7 +93,7 @@ def apaga():
             categorias.pop(indice_apagar)
             valores.pop(indice_apagar)
     file.close()
-    file=open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w+", encoding="utf8")
+    file=open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w", encoding="utf8")
     for i in range (0, len(indices)):
         file.write(str(indices[i]) +","+ nomes[i] +","+ categorias[i] +","+ str(valores[i])+"\n")
     file.close()
