@@ -1,5 +1,5 @@
 #CADA TRANSAÇÃO É UM DICIONARIO, DENTRO DE UMA LISTA DE TRASACOES
-planilha=[{"Nome": "Nome", "Categoria": "Categoria", "Valor": "Valor"}]
+planilha=[{"nome": "Nome", "categoria": "Categoria", "valor": "Valor"}]
 #NOVA TRANSACAO (EX)
 transacao={}
 
