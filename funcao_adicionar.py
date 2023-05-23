@@ -1,15 +1,13 @@
 #CADA TRANSAÇÃO É UM DICIONARIO, DENTRO DE UMA LISTA DE TRASACOES
-planilha=[{"nome": "uber", "categoria": "transporte", "valor": 30 }, {"nome": "racao", "categoria": "casa", "valor": 60,}]
+planilha=[{"Nome": "Nome", "Categoria": "Categoria", "Valor": "Valor"}]
 #NOVA TRANSACAO (EX)
-transacao={"nome": "uber", "categoria": "transporte", "valor": "input"}
-#PRA ADICONAR NOVO, FAZ ALGO ASSIM
-planilha.append(transacao)
-planilha=[]
+transacao={}
+
 #######################funcao read
 def ler():
     global planilha
     try:
-        with open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "r") as file:
+        with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "r") as file:
             linhas=file.readlines() #TODAS AS LINHAS VIRAM UM ITEM DE UMA LISTA
             for linha in linhas[1:]: #????  1 NAO PEGA O "TITULO" DO ARQUIVO
                 itens=linha.strip().split(",") #ITENS = LISTA QUE TEM OS DADOS DE CADA TRANSAÇÃO
@@ -20,38 +18,29 @@ def ler():
 
     return planilha
 
-def armazena(planilha): #TRANSFORMAR O DICIONARIO TRANSACAO EM UM STRING LINHA 
-    with open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w") as file:
-        cabecalho=["Nome", "Categoria", "Valor"]
-        titulos=",".join(cabecalho) #ARMAZENA O CABECALHO COMO STRING, SEPARADO POR VIRGULA
-        file.write(titulos+"\n")
-
-        
-        for i, transacao in enumerate(planilha):
+##############################funcao write
+def armazena(): #TRANSFORMAR O DICIONARIO TRANSACAO EM UM STRING LINHA 
+    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "w+", encoding='utf-8') as file:
+        for i, transacao in enumerate(planilha): #i é idice, nao usei
             itens=[]
             for dados in transacao.values():
                 itens.append(str(dados))
-                linha = ','.join(itens)
+                linha = ",".join(itens)
             file.write(linha+"\n")
-
-        
-
-'''
-for linhas in file:
-    transacoes_existentes=linhas.split(",") #TRANSACOES_EXISTENTE É UMA LISTA EM QUE CADA ITEM É UM ELEMENTO DA TRANSACAO
-    indices.append(transacoes_existentes[0])
-    nomes.append(transacoes_existentes[1])
-    categorias.append(transacoes_existentes[2])
-    valores.append(transacoes_existentes[3])
-file.close()
-'''
-##############################funcao write
 
 #############################funcao add
 def adicao():
+    print("***Adicionar nova transação***")
+    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "w") as file:
+        nome=str(input("Nome: "))
+        categoria=str(input("Categoria: ")).title()
+        valor=str(input("Valor: R$"))
+        transacao={"Nome": nome, "Categoria": categoria, "Valor": valor}
+        planilha.append(transacao)
+        armazena()
+
+option=input("informe a opcao desejada: [1]-adição")
+if option==1:
     ler()
-    nome=input()
-    categoria=input()
-    valor=float(input())
-    transacao={"nome": nome, "categoria": categoria, "valor": valor}
-    planilha.append(transacao)
+    adicao()
+

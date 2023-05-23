@@ -1,7 +1,14 @@
-[[0,Nomes,Categorias,Valores,]
-
+0,Nomes,Categorias,Valores
 1,redbull,Comida,8.0,
-
 2,uber,Transporte,15.0,
+3,racao,Casa,60.0
 
-3,racao,Casa,60.0]
+
+adicionar petri
+deletar petri
+
+listar ferraz
+atualizar ferraz
+
+saldo maceio
+read.me maceio

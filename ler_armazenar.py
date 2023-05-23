@@ -1,12 +1,13 @@
-planilha = [{'nome': 'uber', 'valor': 30, 'categoria': 'transporte'},
-              {'nome': 'racao', 'valor': 60, 'categoria': 'casa'}]
+#CADA TRANSAÇÃO É UM DICIONARIO, DENTRO DE UMA LISTA DE TRASACOES
+planilha=[{"Nome": "Nome", "Categoria": "Categoria", "Valor": "Valor"}]
+#NOVA TRANSACAO (EX)
+transacao={}
 
-transacao = {'nome': 'input', 'categoria': 'input', 'valor': 'input'}
-
+#######################funcao read
 def ler():
     global planilha
     try:
-        with open('./projeto_02/transacoes.csv', 'r') as file:
+        with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "r") as file:
             linhas=file.readlines() #TODAS AS LINHAS VIRAM UM ITEM DE UMA LISTA
             for linha in linhas[1:]: #????  1 NAO PEGA O "TITULO" DO ARQUIVO
                 itens=linha.strip().split(",") #ITENS = LISTA QUE TEM OS DADOS DE CADA TRANSAÇÃO
@@ -17,18 +18,12 @@ def ler():
 
     return planilha
 
-def armazena(planilha): #TRANSFORMAR O DICIONARIO TRANSACAO EM UM STRING LINHA 
-    with open('./projeto_02/transacoes.csv', 'w') as file:
-        cabecalho=["Nome", "Categoria", "Valor"]
-        titulos=",".join(cabecalho) #ARMAZENA O CABECALHO COMO STRING, SEPARADO POR VIRGULA
-        file.write(titulos+"\n")
-
-        
-        for i, transacao in enumerate(planilha):
+##############################funcao write
+def armazena(): #TRANSFORMAR O DICIONARIO TRANSACAO EM UM STRING LINHA 
+    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "w+", encoding='utf-8') as file:
+        for i, transacao in enumerate(planilha): #i é idice, nao usei
             itens=[]
             for dados in transacao.values():
                 itens.append(str(dados))
-                linha = ','.join(itens)
+                linha = ",".join(itens)
             file.write(linha+"\n")
-
-armazena(planilha)
