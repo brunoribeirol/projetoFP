@@ -45,6 +45,7 @@ for linhas in file:
     valores.append(transacoes_existentes[3])
 file.close()
 
+
 def det_indice(): ##DETERMINA O ÍNDICE DA PRÓXIMA LINHA
     return len(indices)
 def pede_nome():
@@ -60,17 +61,18 @@ def adicao(): ##FUNÇÃO 1 -> ADICIONA UMA TRANSAÇÃO NO FIM DO ARQUIVO
     valor_novo = pede_valor()
     categoria_nova = pede_categoria()
 
-    indices.append(indice_novo)
+    indices.append(indice_novo)  ##ADICIONA CADA ITEM DA TRANSAÇÃONAS LISTAS
     nomes.append(nome_novo)
     categorias.append(categoria_nova)
     valores.append(valor_novo)
-    file=open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w+")
+
+    file=open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w+") ##ESCREVE O ARQUIVO DE NOVO 
     for i in range (0, len(indices)):
-        file.write(str(indices[i]) +","+ nomes[i] +","+ categorias[i] +","+ str(valores[i])+"\n")
+        file.write(str(indices[i]) +","+ nomes[i] +","+ categorias[i] +","+ str(valores[i])+"\n") #TENTAR FAZER COM "a+" , sem for -> file.write(indice_novo +","+ nome_novo +","+ categoria_nova +","+ valor_novo+"\n")
     file.close() 
 
 def apaga():
-    file=open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w+", encoding="utf8")
+    file=open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "r", encoding="utf8")
     print("Digite o nome da transação que deseja apagar")
     nome_apagar = pede_nome()
     indice_apagar=nomes.index(nome_apagar)
@@ -82,15 +84,12 @@ def apaga():
             nomes.pop(indice_apagar)
             categorias.pop(indice_apagar)
             valores.pop(indice_apagar)
-        for i in range (0, len(indices)):
-            file.write(str(indices[i]) +","+ nomes[i] +","+ categorias[i] +","+ str(valores[i])+"\n")
-        else:
-            print("Transação não existe")
     file.close()
-    file=open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w+")
+    file=open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w+", encoding="utf8")
     for i in range (0, len(indices)):
         file.write(str(indices[i]) +","+ nomes[i] +","+ categorias[i] +","+ str(valores[i])+"\n")
     file.close()
+    
 
 '''
 # Imprimir o cabeçalho da tabela
