@@ -42,3 +42,10 @@ def adicao():
 file.seek(0)
 lines=file.read()
 print(lines)
+<<<<<<< Updated upstream:antigos/petri.py
+=======
+
+
+key=input()
+if key in menu:
+>>>>>>> Stashed changes:petri.py
