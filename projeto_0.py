@@ -1,5 +1,6 @@
+#***********************LEMBRAR DE MUDAR OS PATHS
 #CADA TRANSAÇÃO É UM DICIONARIO, DENTRO DE UMA LISTA DE TRASACOES
-planilha=[{"Nome": "Nome", "Categoria": "Categoria", "Valor": "Valor"}]
+planilha=[{"nome": "Nome", "categoria": "Categoria", "valor": "Valor"}]
 #NOVA TRANSACAO (EX)
 transacao={}
 
@@ -35,12 +36,29 @@ def adicao():
         nome=str(input("Nome: "))
         categoria=str(input("Categoria: ")).title()
         valor=str(input("Valor: R$"))
-        transacao={"Nome": nome, "Categoria": categoria, "Valor": valor}
+        transacao={"nome": nome, "categoria": categoria, "valor": valor}
         planilha.append(transacao)
         armazena()
 
-option=input("informe a opcao desejada: [1]-adição")
+#############################funcao delete
+def delete():
+    print("***Apagar transação existente***")
+    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "r") as file:
+        nome=str(input("Nome: "))
+        categoria=str(input("Categoria: ")).title()
+        valor=float(input("Valor: R$"))
+        transacao_pra_achar={"nome": nome, "categoria": categoria, "valor": valor}
+        ler()
+        planilha.remove(transacao_pra_achar)
+        armazena()
+
+###########menu prototipo
+option=int(input("\ninforme a opcao desejada: \n[1]-adição\n[2]-remoção\n"))
 if option==1:
     ler()
     adicao()
+    print("Transação adicionada.")
 
+elif option==2:
+    delete()
+    print("Transação removida.")

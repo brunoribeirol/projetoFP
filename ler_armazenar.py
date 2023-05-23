@@ -1,3 +1,4 @@
+#***********************LEMBRAR DE MUDAR OS PATHS
 #CADA TRANSAÇÃO É UM DICIONARIO, DENTRO DE UMA LISTA DE TRASACOES
 planilha=[{"nome": "Nome", "categoria": "Categoria", "valor": "Valor"}]
 #NOVA TRANSACAO (EX)
