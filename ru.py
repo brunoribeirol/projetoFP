@@ -83,20 +83,26 @@ def atualizacao():
     global planilha
     extrato()
     ler()
-    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "w") as file:
+
+    with open("/home/vesf/Desktop/FP01/projeto_03/transacoes.csv", "w+") as file:
         nmr_transacao = int(input('Digite a transação que deseja atualizar: '))
-    
-        for i, v in enumerate(planilha):
-            if nmr_transacao == i:
-                opcao = input('Digite o que quer alterar: ').lower()
-                if opcao in v.keys() and opcao == 'valor':
-                    v[opcao] = float(input('Digite o valor atualizado: '))
-                else:
-                    v[opcao] = input('Digite o nome atualizado: ')
-                armazena()
-                break
-            else:
-                print('Digite uma transação válida.')
+        if nmr_transacao < 0 or nmr_transacao >= len(planilha):
+            print('Transação inválida.')
+            return
+        opcao = input('Digite o que quer alterar: ').lower()
+        if opcao not in planilha[nmr_transacao]:
+            print('Opção inválida.')
+            return
+        elif opcao == 'valor':
+            novo_valor = float(input('Digite o novo valor: '))
+            planilha[nmr_transacao][opcao] = novo_valor
+            print('Transação atualizada.')
+            armazena()
+        else:
+            novo_valor = input('Digite a atualização: ')
+            planilha[nmr_transacao][opcao] = novo_valor
+            print('Transação atualizada.')
+            armazena()
 
 
 # USAR ISSO PARA O CÓDIGO FINAL
