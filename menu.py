@@ -1,3 +1,10 @@
+# Menu - OK
+# Método Sleep ou Clear - +-
+# Cor - OK
+# Saldo - +-
+# Funcionalidade Extra - FALTA
+# READ.me - FALTA
+
 import os
 
 
@@ -5,6 +12,29 @@ def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
 
+# USAR ISSO PARA O CÓDIGO FINAL
+def calculandoSaldo():
+    saldo = 0
+    for transacao in planilha:
+        preco = transacao.get("valor")  # ???
+        if preco:
+            saldo += float(preco)  # ??????
+
+    # Verificar se o saldo é maior ou igual a 0 e retornar com cor correspondente
+    if saldo >= 0:
+        saldoFinal = "\033[92mR${:.2f}\033[0m".format(saldo)  # Verde
+    else:
+        saldoFinal = "\033[91mR${:.2f}\033[0m".format(saldo)  # Vermelho
+
+    return saldoFinal
+
+
+# Carregar as transações existentes
+planilha = ler()
+# transactions = read_transactions() #TA ERRADO ler()
+
+
+# Criando um def para menu para não ficar muitas linhas de código no loop principal
 def menu():
     print("\033[0m")
 
@@ -31,38 +61,42 @@ while True:
 
     if acao == "1":
         # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
-        # adicao()
+        adicao()
         input("\033[0;30m\nPressione Enter para continuar...")
 
     elif acao == "2":
         # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
-        # extrato()
+        extrato()
         # list_all_transactions(transactions) VER SE PRECISA DISSO
         input("\033[0;30m\nPressione Enter para continuar...")
 
     elif acao == "3":
         # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
-        # atualizacao()
+        atualizacao()
         # list_all_transactions(transactions) VER SE PRECISA DISSO
         input("\033[0;30m\nPressione Enter para continuar...")
 
     elif acao == "4":
         # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
-        # delete()
+        delete()
         # list_all_transactions(transactions) VER SE PRECISA DISSO
         input("\033[0;30m\nPressione Enter para continuar...")
 
     elif acao == "5":
         # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
-        # apagarTudo()
-
-        # COLOCAR O PRINT DO APAGAR TDUO FALTA !!!!!!!!!!
+        zerar = input("\nVocê tem CERTEZA que deseja apagar TUDO? [S] ou [N]\n")
+        if zerar == "S" or zerar == "s":
+            apagarTudo()
+        elif zerar == "N" or zerar == "n":
+            continue
+        else:
+            print("\033[91mOpção inválida. Por favor, tente novamente.")
 
         input("\033[0;30m\nPressione Enter para continuar...")
 
     elif acao == "6":
         # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
-        # print(f"Saldo Atual: {calculandoSaldo()}")
+        print(f"Saldo Atual: {calculandoSaldo()}")
         input("\033[0;30m\nPressione Enter para continuar...")
 
     elif acao == "7":
