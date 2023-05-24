@@ -35,9 +35,16 @@ def armazena():
 def adicao():
     print("***Adicionar nova transação***")
     with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "w") as file:
+        sinal=input("A transação foi receita ou gasto? [R] ou [G]\n").upper()
+        print(sinal)
+        if sinal != "G" and sinal != "R":
+            print("Opção inválida, tente novamente")
         nome=str(input("Nome: ")).title() #Acho mais bonito quando inicia com maiúsculo kkk
         categoria=str(input("Categoria: ")).title()
-        valor=float(input("Valor: R$"))
+        if sinal=="G":
+            valor=float("-"+input("Valor: R$"))
+        else:
+            valor=float("+"+input("Valor: R$"))
         transacao={"nome": nome, "categoria": categoria, "valor": valor}
         planilha.append(transacao)
         armazena()
@@ -103,9 +110,9 @@ def atualizacao():
 def calculandoSaldo():
     saldo = 0
     for transacao in planilha:
-        preco = transacao.get("valor")  # ???
-        if preco:
-            saldo += float(preco)  # ??????
+        preco = transacao.get("valor") #"valor" é a key
+        if preco!= "Valor": #value do cabecalho para key "valor" é "Valor"
+            saldo += float(preco)
 
     # Verificar se o saldo é maior ou igual a 0 e retornar com cor correspondente
     if saldo >= 0:
