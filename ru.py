@@ -117,7 +117,7 @@ def calculandoSaldo():
 
 
 # Carregar as transações existentes
-planilha = ler()
+planilha = ler() #NAO ZERA A PLANILHA QUANDO VC ENCERRA O PROGRAMA E INICIA DE NOVO
 # transactions = read_transactions() #TA ERRADO ler()
 
 
