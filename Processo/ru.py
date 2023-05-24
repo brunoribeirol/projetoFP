@@ -11,7 +11,7 @@ def clear_screen():
 def ler():
     global planilha
     try:
-        with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "r") as file:
+        with open("/home/vesf/Desktop/FP01/projeto_04/transacoes.csv", "r") as file:
             linhas=file.readlines() 
             for linha in linhas[1:]: 
                 itens=linha.strip().split(",") 
@@ -25,7 +25,7 @@ def ler():
 
 def armazena():
     global planilha
-    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "w+", encoding='utf-8') as file:
+    with open("/home/vesf/Desktop/FP01/projeto_04/transacoes.csv", "w+", encoding='utf-8') as file:
         for i, transacao in enumerate(planilha): 
             itens=[]
             for dados in transacao.values():
@@ -36,10 +36,11 @@ def armazena():
 
 def adicao():
     print("***Adicionar nova transação***")
-    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "w") as file:
+    with open("/home/vesf/Desktop/FP01/projeto_04/transacoes.csv", "w") as file:
         sinal=input("A transação foi receita ou gasto? [R] ou [G]\n").upper()
         if sinal != "G" and sinal != "R":
             print("Opção inválida, tente novamente")
+            
         nome=str(input("Nome: ")).title()
         categoria=str(input("Categoria: ")).title()
         if sinal=="G":
@@ -53,7 +54,7 @@ def adicao():
 
 def delete():
     print("***Apagar transação existente***")
-    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "r") as file:
+    with open("/home/vesf/Desktop/FP01/projeto_04/transacoes.csv", "r") as file:
         opcao = int(input('Digite o número da transação que deseja apagar: '))
         for i in range(len(planilha)):
             if i == opcao:
@@ -62,7 +63,7 @@ def delete():
                 
 def apagarTudo():
     print("***Limpar TODAS as transações***")
-    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "r") as file:
+    with open("/home/vesf/Desktop/FP01/projeto_04/transacoes.csv", "r") as file:
         opcao = 1
         for i in range(1, len(planilha)+1, 1):
             if i != opcao:
@@ -72,7 +73,7 @@ def apagarTudo():
 
 def extrato():
     tabela = []
-    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "r+") as file:
+    with open("/home/vesf/Desktop/FP01/projeto_04/transacoes.csv", "r+") as file:
         for linha in file.readlines():
             tabela.append(linha)
         for i, v in enumerate(tabela):
@@ -130,7 +131,13 @@ def atualizacao():
             return
 
         if opcao == "valor":
-            novo_valor = float(input("Digite o novo valor: "))
+            sinal=input("A transação foi receita ou gasto? [R] ou [G]\n").upper()
+            if sinal != "G" and sinal != "R":
+                print("Opção inválida, tente novamente")
+            if sinal=="G":
+                novo_valor=float("-"+input("Digite novo valor: R$"))
+            elif sinal == 'R':
+                novo_valor=float("+"+input("Digite novo valor: R$"))
             planilha[nmr_transacao + 1][opcao] = novo_valor
             print("Transação atualizada.")
             armazena()
