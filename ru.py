@@ -2,11 +2,11 @@
 planilha=[{"nome": "Nome", "categoria": "Categoria", "valor": "Valor"}]
 
 transacao={}
-
+#path=input()
 def ler():
     global planilha
     try:
-        with open("/home/vesf/Desktop/FP01/projeto_02/transacoes.csv", "r") as file:
+        with open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "r") as file:
             linhas=file.readlines() 
             for linha in linhas[1:]: 
                 itens=linha.strip().split(",") 
@@ -20,7 +20,7 @@ def ler():
 
 def armazena():
     global planilha
-    with open("/home/vesf/Desktop/FP01/projeto_02/transacoes.csv", "w+", encoding='utf-8') as file:
+    with open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w+", encoding='utf-8') as file:
         for i, transacao in enumerate(planilha): 
             itens=[]
             for dados in transacao.values():
@@ -30,7 +30,7 @@ def armazena():
 
 def adicao():
     print("***Adicionar nova transação***")
-    with open("/home/vesf/Desktop/FP01/projeto_02/transacoes.csv", "w") as file:
+    with open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w") as file:
         nome=str(input("Nome: ")).title() #Acho mais bonito quando inicia com maiúsculo kkk
         categoria=str(input("Categoria: ")).title()
         valor=str(input("Valor: R$"))
@@ -41,7 +41,7 @@ def adicao():
 
 def delete():
     print("***Apagar transação existente***")
-    with open("/home/vesf/Desktop/FP01/projeto_02/transacoes.csv", "r") as file:
+    with open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "r") as file:
         nome=str(input("Nome: ")).title() #Acho mais bonito quando inicia com maiúsculo kkk
         categoria=str(input("Categoria: ")).title()
         valor=float(input("Valor: R$"))
@@ -53,14 +53,14 @@ def delete():
     # global planilha
     # extrato()
     # ler()
-    # with open("/home/vesf/Desktop/FP01/projeto_02/transacoes.csv", "w") as file:
+    # with open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w") as file:
         # opcao = int(input('Digite a transação que deseja apagar: '))
         # planilha.pop(opcao)
         # armazena()
 
 def extrato():
     tabela = []
-    with open("/home/vesf/Desktop/FP01/projeto_02/transacoes.csv", "r+") as file:
+    with open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "r+") as file:
         for linha in file.readlines():
             tabela.append(linha)
         for i, v in enumerate(tabela):
@@ -80,7 +80,7 @@ def atualizacao():
     global planilha
     extrato()
     ler()
-    with open("/home/vesf/Desktop/FP01/projeto_02/transacoes.csv", "w") as file:
+    with open("/Users/vinicius/Documents/GitHub/projetoFP/petri.csv", "w") as file:
         nmr_transacao = int(input('Digite a transação que deseja atualizar: '))
         for i, v in enumerate(planilha):
             if nmr_transacao == i:
