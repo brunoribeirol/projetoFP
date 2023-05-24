@@ -8,7 +8,8 @@
 # USAR ISSO PARA O CÓDIGO FINAL
 
 # Função criada para calcular o saldo do usuário
-"""def calculandoSaldo():
+''''
+def calculandoSaldo():
     saldo = 0
     for transacao in planilha:
         preco = transacao.get("valor") #???
@@ -22,7 +23,12 @@
         saldoFinal = "\033[91mR${:.2f}\033[0m".format(saldo)  #Vermelho
     
     return saldoFinal
-"""
+'''
+
+#Criação da funcionalidade que deleta tudo que tem no arquivo .csv
+'''
+def apagaTudo():
+'''
 
 
 # Carregar as transações existentes
