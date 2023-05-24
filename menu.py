@@ -10,9 +10,9 @@ def menu():
     
     print("\033[0;34m 1. Adicionar Transação")
     print("\033[0;35m 2. Listar Todas as Transações")
-    print("\033[0;36m 3. Listar Transações por Categoria")
-    print("\033[0;37m 4. Extrato de Despesas por Categoria")
-    print("\033[0;33m 5. Remover Transação")
+    print("\033[0;36m 3. Atualização de uma Transação")
+    print("\033[0;37m 4. Apagar uma Transação")
+    print("\033[0;33m 5. Apagar TODAS as Transações")
     print("\033[0;34m 6. Ver Saldo Atual")
     print("\033[0;31m 7. Sair do Programa")
     print("\033[0m")
