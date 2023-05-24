@@ -92,27 +92,30 @@ def extrato():
 def atualizacao():
     global planilha
     extrato()
-    ler()
-
-    with open("/home/vesf/Desktop/FP01/projeto_03/transacoes.csv", "w+") as file:
-        nmr_transacao = int(input('Digite a transação que deseja atualizar: '))
-        if nmr_transacao < 0 or nmr_transacao >= len(planilha):
-            print('Transação inválida.')
-            return
-        opcao = input('Digite o que quer alterar: ').lower()
-        if opcao not in planilha[nmr_transacao]:
-            print('Opção inválida.')
-            return
-        elif opcao == 'valor':
-            novo_valor = float(input('Digite o novo valor: '))
-            planilha[nmr_transacao][opcao] = novo_valor
-            print('Transação atualizada.')
-            armazena()
-        else:
-            novo_valor = input('Digite a atualização: ')
-            planilha[nmr_transacao][opcao] = novo_valor
-            print('Transação atualizada.')
-            armazena()
+    with open("/home/vesf/Desktop/FP01/projeto_04/transacoes.csv", "w+") as file:
+        try:
+            nmr_transacao = int(input("Digite o número da transação que deseja atualizar: ")) - 1
+            if nmr_transacao < 0 or nmr_transacao >= len(planilha[1:]):
+                print("Transação inválida.")
+                return
+    
+            opcao = input("Digite o que quer alterar: ").lower()
+            if opcao not in planilha[nmr_transacao + 1]:
+                print("Opção inválida.")
+                return
+    
+            if opcao == "valor":
+                novo_valor = float(input("Digite o novo valor: "))
+                planilha[nmr_transacao + 1][opcao] = novo_valor
+                print("Transação atualizada.")
+                armazena()
+            else:
+                novo_valor = input("Digite a atualização: ")
+                planilha[nmr_transacao + 1][opcao] = novo_valor
+                print("Transação atualizada.")
+                armazena()
+        except ValueError:
+            print("Opção inválida, tente novamente.")
 
 
 def calculandoSaldo():
