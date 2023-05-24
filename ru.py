@@ -4,14 +4,13 @@ planilha=[{"nome": "Nome", "categoria": "Categoria", "valor": "Valor"}]
 
 transacao={}
 
-
 def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
 def ler():
     global planilha
     try:
-        with open("/home/vesf/Desktop/FP01/projeto_03/transacoes.csv", "r") as file:
+        with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "r") as file:
             linhas=file.readlines() 
             for linha in linhas[1:]: 
                 itens=linha.strip().split(",") 
@@ -25,7 +24,7 @@ def ler():
 
 def armazena():
     global planilha
-    with open("/home/vesf/Desktop/FP01/projeto_03/transacoes.csv", "w+", encoding='utf-8') as file:
+    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "w+", encoding='utf-8') as file:
         for i, transacao in enumerate(planilha): 
             itens=[]
             for dados in transacao.values():
@@ -35,37 +34,38 @@ def armazena():
 
 def adicao():
     print("***Adicionar nova transação***")
-    with open("/home/vesf/Desktop/FP01/projeto_03/transacoes.csv", "w") as file:
+    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "w") as file:
         nome=str(input("Nome: ")).title() #Acho mais bonito quando inicia com maiúsculo kkk
         categoria=str(input("Categoria: ")).title()
         valor=float(input("Valor: R$"))
         transacao={"nome": nome, "categoria": categoria, "valor": valor}
         planilha.append(transacao)
         armazena()
-
-
+''''
+'''#'DELETE PETRI                
 def delete():
     print("***Apagar transação existente***")
-    with open("/home/vesf/Desktop/FP01/projeto_03/transacoes.csv", "r") as file:
-        nome=str(input("Nome: ")).title() #Acho mais bonito quando inicia com maiúsculo kkk
-        categoria=str(input("Categoria: ")).title()
-        valor=float(input("Valor: R$"))
-        transacao_pra_achar={"nome": nome, "categoria": categoria, "valor": valor}
+    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "r") as file:
+        opcao = int(input('Digite o número da transação que deseja apagar: '))
+        for i in range(len(planilha)):
+            if i == opcao:
+                planilha.pop(opcao)
+        armazena()    
+                
+def apagarTudo():
+    print("***Limpar TODAS as transações***")
+    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "r") as file:
         ler()
-        planilha.remove(transacao_pra_achar)
-        armazena()
-        ############# OUTRA OPÇÃO PRA DELETAR PELO ÍNDICE ############
-    # global planilha
-    # extrato()
-    # ler()
-    # with open("/home/vesf/Desktop/FP01/projeto_02/transacoes.csv", "w") as file:
-        # opcao = int(input('Digite a transação que deseja apagar: '))
-        # planilha.pop(opcao)
-        # armazena()
+        cabecalho={"nome": "Nome", "categoria": "Categoria", "valor": "Valor"}
+        for f in planilha:
+            if f != cabecalho:
+                planilha.remove(f)
+        armazena() 
+
 
 def extrato():
     tabela = []
-    with open("/home/vesf/Desktop/FP01/projeto_03/transacoes.csv", "r+") as file:
+    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "r+") as file:
         for linha in file.readlines():
             tabela.append(linha)
         for i, v in enumerate(tabela):
@@ -79,13 +79,12 @@ def extrato():
                 print(f"Categoria: {separar[1]}")
                 print(f"Valor: R${separar[2]}")
 
-
-
+###atualiacao nao funciona!!
 def atualizacao():
     global planilha
     extrato()
     ler()
-    with open("/home/vesf/Desktop/FP01/projeto_03/transacoes.csv", "w") as file:
+    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "w") as file:
         nmr_transacao = int(input('Digite a transação que deseja atualizar: '))
     
         for i, v in enumerate(planilha):
@@ -170,8 +169,21 @@ while True:
 
     elif acao == "4":
         # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
+        extrato()
         delete()
         # list_all_transactions(transactions) VER SE PRECISA DISSO
+        input("\033[0;30m\nPressione Enter para continuar...")
+
+    elif acao == "5":
+        # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
+        zerar = input("\nVocê tem CERTEZA que deseja apagar TUDO? [S] ou [N]\n").upper()
+        if zerar == "S":
+            apagarTudo()
+        elif zerar == "N":
+            continue
+        else:
+            print("\033[91mOpção inválida. Por favor, tente novamente.")
+
         input("\033[0;30m\nPressione Enter para continuar...")
     
     elif acao == "6":
@@ -188,17 +200,7 @@ while True:
         input("\033[0;30m\nPressione Enter para continuar...")
 
     '''
-    elif acao == "5":
-        # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
-        zerar = input("\nVocê tem CERTEZA que deseja apagar TUDO? [S] ou [N]\n")
-        if zerar == "S" or zerar == "s":
-            apagarTudo()
-        elif zerar == "N" or zerar == "n":
-            continue
-        else:
-            print("\033[91mOpção inválida. Por favor, tente novamente.")
-
-        input("\033[0;30m\nPressione Enter para continuar...")
+    
     '''
 
     
