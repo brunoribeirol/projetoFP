@@ -55,12 +55,11 @@ def delete():
 def apagarTudo():
     print("***Limpar TODAS as transações***")
     with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "r") as file:
-        ler()
-        cabecalho={"nome": "Nome", "categoria": "Categoria", "valor": "Valor"}
-        for f in planilha:
-            if f != cabecalho:
-                planilha.remove(f)
-        armazena() 
+        opcao = 1
+        for i in range(1, len(planilha)+1, 1):
+            if i != opcao:
+                planilha.pop(opcao)
+        armazena()  
 
 
 def extrato():
@@ -198,10 +197,3 @@ while True:
     else:
         print("\033[91mOpção inválida. Por favor, tente novamente.")
         input("\033[0;30m\nPressione Enter para continuar...")
-
-    '''
-    
-    '''
-
-    
-        
