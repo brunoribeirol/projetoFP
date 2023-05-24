@@ -60,9 +60,9 @@ def armazena():  # TRANSFORMAR O DICIONARIO TRANSACAO EM UM STRING LINHA
 
 #############################funcao add
 def adicao():
-    print("***Adicionar nova transação***")
+    print("Adicionando nova transação:")
     with open(
-        "//Users/brunoribeiro/Documents/GitHub/projetoFP/transacoes.csv", "w"
+        "/Users/brunoribeiro/Documents/GitHub/projetoFP/transacoes.csv", "w"
     ) as file:
         nome = str(input("Nome: "))
         categoria = str(input("Categoria: ")).title()
@@ -74,7 +74,7 @@ def adicao():
 
 #############################funcao delete
 def delete():
-    print("***Apagar transação existente***")
+    print("Apagando uma transação existente: ")
     with open(
         "/Users/brunoribeiro/Documents/GitHub/projetoFP/transacoes.csv", "r"
     ) as file:
@@ -118,17 +118,19 @@ planilha = ler()
 # transactions = read_transactions() #TA ERRADO ler()
 
 
-# Criação da função menu para diminuir o bloco de código no loop principal
+# Criando um def para menu para não ficar muitas linhas de código no loop principal
 def menu():
+    print("\033[0m")
+
     print("\033[1;3m--------------------------------")
     print("\033[1;3m         MENU PRINCIPAL")
     print("\033[1;3m--------------------------------")
 
     print("\033[0;34m 1. Adicionar Transação")
     print("\033[0;35m 2. Listar Todas as Transações")
-    print("\033[0;36m 3. Listar Transações por Categoria")
-    print("\033[0;37m 4. Extrato de Despesas por Categoria")
-    print("\033[0;33m 5. Remover Transação")
+    print("\033[0;36m 3. Atualização de uma Transação")
+    print("\033[0;37m 4. Apagar uma Transação")
+    print("\033[0;33m 5. Apagar TODAS as Transações")
     print("\033[0;34m 6. Ver Saldo Atual")
     print("\033[0;31m 7. Sair do Programa")
     print("\033[0m")
@@ -139,58 +141,56 @@ while True:
 
     menu()
 
-    acao = input("\nEscolha uma opção: ")
+    acao = input("\033[1m\nEscolha uma opção: ")
 
     if acao == "1":
         # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
         adicao()
-        input("\nPressione Enter para continuar...")
+        input("\033[0;30m\nPressione Enter para continuar...")
 
     elif acao == "4":
         # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
         delete()
-        # list_all_transactions(transactions)
-        input("\nPressione Enter para continuar...")
+        # list_all_transactions(transactions) VER SE PRECISA DISSO
+        input("\033[0;30m\nPressione Enter para continuar...")
 
     elif acao == "6":
         # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
         print(f"Saldo Atual: {calculandoSaldo()}")
-        input("\nPressione Enter para continuar...")
+        input("\033[0;30m\nPressione Enter para continuar...")
 
     elif acao == "7":
-        print("Obrigado por utilizar o Sistema de Controle Financeiro!")
+        print("\033[1m\nObrigado por utilizar o nosso Sistema de Controle Financeiro!")
         break
 
     else:
-        print("Opção inválida. Por favor, tente novamente.")
-        input("\nPressione Enter para continuar...")
+        print("\033[91mOpção inválida. Por favor, tente novamente.")
+        input("\033[0;30m\nPressione Enter para continuar...")
 
-
-"""
+    """
     elif acao == "2":
         # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
         extrato()
-        # list_all_transactions(transactions) VER ESSA
-        input("\nPressione Enter para continuar...")
-    
+        # list_all_transactions(transactions) VER SE PRECISA DISSO
+        input("\033[0;30m\nPressione Enter para continuar...")
+
+        
     elif acao == "3":
         # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
         atualizacao()
-        # list_all_transactions(transactions)
-        input("\nPressione Enter para continuar...")
+        # list_all_transactions(transactions) VER SE PRECISA DISSO
+        input("\033[0;30m\nPressione Enter para continuar...")
 
 
-        
     elif acao == "5":
         # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
-        apagarTudo()
-        # FALTA VER QUAL EXTRA VOU COLOCAR
-        input("\nPressione Enter para continuar...")
-"""
+        zerar = input("\nVocê tem CERTEZA que deseja apagar TUDO? [S] ou [N]\n")
+        if zerar == "S" or zerar == "s":
+            apagarTudo()
+        elif zerar == "N" or zerar == "n":
+            continue
+        else:
+            print("\033[91mOpção inválida. Por favor, tente novamente.")
 
-
-"""
-for transacao in planilha:
-    for i in transacao.keys():
-        del transacao[i]
-"""
+        input("\033[0;30m\nPressione Enter para continuar...")
+    """
