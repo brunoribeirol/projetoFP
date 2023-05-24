@@ -1,8 +1,8 @@
 import os
 
-planilha=[{"nome": "Nome", "categoria": "Categoria", "valor": "Valor"}]
+planilha = [{"nome": "Nome", "categoria": "Categoria", "valor": "Valor"}]
 
-transacao={}
+transacao = {}
 
 
 def clear_screen():
@@ -12,61 +12,63 @@ def clear_screen():
 def ler():
     global planilha
     try:
-        with open("/Users/brunoribeiro/Documents/GitHub/projetoFP/transacoes.csv", "r") as file:
-            linhas=file.readlines() 
-            for linha in linhas[1:]: 
-                itens=linha.strip().split(",") 
-                transacao={"nome": itens[0], "categoria": itens[1], "valor": float(itens[2])} 
+        with open("transacoes.csv", "r") as file:
+            linhas = file.readlines()
+            for linha in linhas[1:]:
+                itens = linha.strip().split(",")
+                transacao = {
+                    "nome": itens[0],
+                    "categoria": itens[1],
+                    "valor": float(itens[2]),
+                }
                 planilha.append(transacao)
     except FileNotFoundError:
-        pass 
+        pass
 
     return planilha
 
 
 def armazena():
     global planilha
-    with open("/Users/brunoribeiro/Documents/GitHub/projetoFP/transacoes.csv", "w+", encoding='utf-8') as file:
-        for i, transacao in enumerate(planilha): 
-            itens=[]
+    with open("transacoes.csv", "w+", encoding="utf-8") as file:
+        for transacao in planilha:
+            itens = []
             for dados in transacao.values():
                 itens.append(str(dados))
-                linha = ",".join(itens)
-            file.write(linha+"\n")
+            linha = ",".join(itens)
+            file.write(linha + "\n")
 
 
 def adicao():
     print("***Adicionar nova transação***")
-    with open("/Users/brunoribeiro/Documents/GitHub/projetoFP/transacoes.csv", "w") as file:
-        sinal=input("A transação foi receita ou gasto? [R] ou [G]\n").upper()
-        if sinal != "G" and sinal != "R":
-            print("Opção inválida, tente novamente")
-            nome=str(input("Nome: ")).title()
-            categoria=str(input("Categoria: ")).title()
-            if sinal=="G":
-                valor=float("-"+input("Valor: R$"))
-            else:
-                valor=float("+"+input("Valor: R$"))
-            transacao={"nome": nome, "categoria": categoria, "valor": valor}
-            planilha.append(transacao)
-            armazena()
+    sinal = input("A transação foi receita ou gasto? [R] ou [G]\n").upper()
+    if sinal != "G" and sinal != "R":
+        print("Opção inválida, tente novamente")
+        return
+
+    nome = input("Nome: ").title()
+    categoria = input("Categoria: ").title()
+
+    try:
+        valor = float(input("Valor: R$"))
+        if sinal == "G":
+            valor *= -1
+    except ValueError:
+        print("Valor inválido, tente novamente.")
+        return
+
+    transacao = {"nome": nome, "categoria": categoria, "valor": valor}
+    planilha.append(transacao)
+    armazena()
 
 
 def extrato():
-    tabela = []
-    with open("/Users/brunoribeiro/Documents/GitHub/projetoFP/transacoes.csv", "r+") as file:
-        for linha in file.readlines():
-            tabela.append(linha)
-        for i, v in enumerate(tabela):
-            separar = v.split(',')
-            
-            if i == 0: 
-                continue
-            else:                
-                print(f"\nTransação {i}:")
-                print(f"Nome: {separar[0]}")
-                print(f"Categoria: {separar[1]}")
-                print(f"Valor: R${separar[2]}")
+    print("***Extrato de todas as transações***")
+    for i, transacao in enumerate(planilha[1:], start=1):
+        print(f"\nTransação {i}:")
+        print(f"Nome: {transacao['nome']}")
+        print(f"Categoria: {transacao['categoria']}")
+        print(f"Valor: R${transacao['valor']:.2f}")
 
 
 def transacoesCategoria():
@@ -74,7 +76,7 @@ def transacoesCategoria():
     categoria = input("Digite a categoria desejada: ").title()
 
     transacoes_encontradas = []
-    for transacao in planilha:
+    for transacao in planilha[1:]:
         if transacao["categoria"] == categoria:
             transacoes_encontradas.append(transacao)
 
@@ -83,7 +85,7 @@ def transacoesCategoria():
         for i, transacao in enumerate(transacoes_encontradas, start=1):
             print(f"\nTransação {i}:")
             print(f"Nome: {transacao['nome']}")
-            print(f"Valor: R${transacao['valor']}")
+            print(f"Valor: R${transacao['valor']:.2f}")
     else:
         print(f"\nNão há transações na categoria '{categoria}'.")
 
@@ -93,7 +95,7 @@ def extratoCategoria():
     categoria = input("Digite a categoria desejada: ").title()
 
     total_despesas = 0
-    for transacao in planilha:
+    for transacao in planilha[1:]:
         if transacao["categoria"] == categoria and transacao["valor"] < 0:
             total_despesas += transacao["valor"]
 
@@ -103,47 +105,65 @@ def extratoCategoria():
 def atualizacao():
     global planilha
     extrato()
-    ler()
-    with open("/Users/brunoribeiro/Documents/GitHub/projetoFP/transacoes.csv", "w") as file:
-        nmr_transacao = int(input('Digite a transação que deseja atualizar: '))
-    
-        for i, v in enumerate(planilha):
-            if nmr_transacao == i:
-                opcao = input('Digite o que quer alterar: ').lower()
-                if opcao in v.keys() and opcao == 'valor':
-                    v[opcao] = float(input('Digite o valor atualizado: '))
-                else:
-                    v[opcao] = input('Digite o nome atualizado: ')
-                armazena()
-                break
-            else:
-                print('Digite uma transação válida.')
+    try:
+        nmr_transacao = int(input("Digite o número da transação que deseja atualizar: ")) - 1
+        if nmr_transacao < 0 or nmr_transacao >= len(planilha[1:]):
+            print("Transação inválida.")
+            return
+
+        opcao = input("Digite o que quer alterar: ").lower()
+        if opcao not in planilha[nmr_transacao + 1]:
+            print("Opção inválida.")
+            return
+
+        if opcao == "valor":
+            novo_valor = float(input("Digite o novo valor: "))
+            planilha[nmr_transacao + 1][opcao] = novo_valor
+            print("Transação atualizada.")
+            armazena()
+        else:
+            novo_valor = input("Digite a atualização: ")
+            planilha[nmr_transacao + 1][opcao] = novo_valor
+            print("Transação atualizada.")
+            armazena()
+    except ValueError:
+        print("Opção inválida, tente novamente.")
 
 
 def delete():
     print("***Apagar transação existente***")
-    with open("/Users/brunoribeiro/Documents/GitHub/projetoFP/transacoes.csv", "r") as file:
-        opcao = int(input('Digite o número da transação que deseja apagar: '))
-        for i in range(len(planilha)):
-            if i == opcao:
-                planilha.pop(opcao)
-        armazena()    
-                
+    extrato()
+    try:
+        opcao = int(input("Digite o número da transação que deseja apagar: ")) - 1
+        if opcao < 0 or opcao >= len(planilha[1:]):
+            print("Transação inválida.")
+            return
+
+        planilha.pop(opcao + 1)
+        armazena()
+    except ValueError:
+        print("Opção inválida, tente novamente.")
+
+
 def apagarTudo():
     print("***Limpar TODAS as transações***")
-    with open("/Users/brunoribeiro/Documents/GitHub/projetoFP/transacoes.csv", "r") as file:
-        opcao = 1
-        for i in range(1, len(planilha)+1, 1):
-            if i != opcao:
-                planilha.pop(opcao)
-        armazena()  
+    confirmacao = input("Você tem CERTEZA que deseja apagar TUDO? [S] ou [N]\n").upper()
+    if confirmacao == "S":
+        planilha.clear()
+        planilha.append({"nome": "Nome", "categoria": "Categoria", "valor": "Valor"})
+        armazena()
+        print("Todas as transações foram apagadas.")
+    elif confirmacao == "N":
+        return
+    else:
+        print("Opção inválida. Por favor, tente novamente.")
 
 
 def calculandoSaldo():
     saldo = 0
-    for transacao in planilha:
-        preco = transacao.get("valor") #"valor" é a key
-        if preco!= "Valor": #value do cabecalho para key "valor" é "Valor"
+    for transacao in planilha[1:]:
+        preco = transacao.get("valor")  # "valor" é a key
+        if preco != "Valor":  # value do cabeçalho para key "valor" é "Valor"
             saldo += float(preco)
 
     # Verificar se o saldo é maior ou igual a 0 e retornar com cor correspondente
@@ -155,11 +175,10 @@ def calculandoSaldo():
     return saldoFinal
 
 
+planilha = ler()  # NÃO ZERA A PLANILHA QUANDO VOCÊ ENCERRA O PROGRAMA E INICIA DE NOVO
 
-planilha = ler() #NAO ZERA A PLANILHA QUANDO VC ENCERRA O PROGRAMA E INICIA DE NOVO
 
-
-# Criando um def para menu para não ficar muitas linhas de código no loop principal
+# Criando uma função de menu para evitar muitas linhas de código no loop principal
 def menu():
     print("\033[0m")
 
@@ -167,12 +186,10 @@ def menu():
     print("\033[1;3m         MENU PRINCIPAL")
     print("\033[1;3m--------------------------------")
 
-    print("\033[0;34m 1. Adicionar Transação") 
+    print("\033[0;34m 1. Adicionar Transação")
     print("\033[0;35m 2. Listar Todas as Transações")
-
     print("\033[0;30m 3. Listar Transações por Categoria")
     print("\033[0;91m 4. Extrato por Categoria")
-
     print("\033[0;36m 5. Atualização de uma Transação")
     print("\033[0;37m 6. Apagar uma Transação")
     print("\033[0;33m 7. Apagar TODAS as Transações")
@@ -209,21 +226,13 @@ while True:
         input("\033[0;30m\nPressione Enter para continuar...")
 
     elif acao == "6":
-        extrato()
         delete()
         input("\033[0;30m\nPressione Enter para continuar...")
 
     elif acao == "7":
-        zerar = input("\nVocê tem CERTEZA que deseja apagar TUDO? [S] ou [N]\n").upper()
-        if zerar == "S":
-            apagarTudo()
-        elif zerar == "N":
-            continue
-        else:
-            print("\033[91mOpção inválida. Por favor, tente novamente.")
-
+        apagarTudo()
         input("\033[0;30m\nPressione Enter para continuar...")
-    
+
     elif acao == "8":
         print(f"Saldo Atual: {calculandoSaldo()}")
         input("\033[0;30m\nPressione Enter para continuar...")
