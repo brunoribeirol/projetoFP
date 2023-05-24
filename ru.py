@@ -4,13 +4,15 @@ planilha=[{"nome": "Nome", "categoria": "Categoria", "valor": "Valor"}]
 
 transacao={}
 
+
 def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
+
 
 def ler():
     global planilha
     try:
-        with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "r") as file:
+        with open("/Users/brunoribeiro/Documents/GitHub/projetoFP/transacoes.csv", "r") as file:
             linhas=file.readlines() 
             for linha in linhas[1:]: 
                 itens=linha.strip().split(",") 
@@ -24,7 +26,7 @@ def ler():
 
 def armazena():
     global planilha
-    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "w+", encoding='utf-8') as file:
+    with open("/Users/brunoribeiro/Documents/GitHub/projetoFP/transacoes.csv", "w+", encoding='utf-8') as file:
         for i, transacao in enumerate(planilha): 
             itens=[]
             for dados in transacao.values():
@@ -32,20 +34,27 @@ def armazena():
                 linha = ",".join(itens)
             file.write(linha+"\n")
 
+
 def adicao():
     print("***Adicionar nova transação***")
-    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "w") as file:
-        nome=str(input("Nome: ")).title() #Acho mais bonito quando inicia com maiúsculo kkk
+    with open("/Users/brunoribeiro/Documents/GitHub/projetoFP/transacoes.csv", "w") as file:
+        sinal=input("A transação foi receita ou gasto? [R] ou [G]\n").upper()
+        if sinal != "G" and sinal != "R":
+            print("Opção inválida, tente novamente")
+        nome=str(input("Nome: ")).title()
         categoria=str(input("Categoria: ")).title()
-        valor=float(input("Valor: R$"))
+        if sinal=="G":
+            valor=float("-"+input("Valor: R$"))
+        else:
+            valor=float("+"+input("Valor: R$"))
         transacao={"nome": nome, "categoria": categoria, "valor": valor}
         planilha.append(transacao)
         armazena()
-''''
-'''#'DELETE PETRI                
+
+
 def delete():
     print("***Apagar transação existente***")
-    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "r") as file:
+    with open("/Users/brunoribeiro/Documents/GitHub/projetoFP/transacoes.csv", "r") as file:
         opcao = int(input('Digite o número da transação que deseja apagar: '))
         for i in range(len(planilha)):
             if i == opcao:
@@ -54,7 +63,7 @@ def delete():
                 
 def apagarTudo():
     print("***Limpar TODAS as transações***")
-    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "r") as file:
+    with open("/Users/brunoribeiro/Documents/GitHub/projetoFP/transacoes.csv", "r") as file:
         opcao = 1
         for i in range(1, len(planilha)+1, 1):
             if i != opcao:
@@ -64,7 +73,7 @@ def apagarTudo():
 
 def extrato():
     tabela = []
-    with open("/Users/vinicius/Desktop/CESAR/fund. programação/listas de exercício/PROJETINHU/bancodedados.csv", "r+") as file:
+    with open("/Users/brunoribeiro/Documents/GitHub/projetoFP/transacoes.csv", "r+") as file:
         for linha in file.readlines():
             tabela.append(linha)
         for i, v in enumerate(tabela):
@@ -78,7 +87,8 @@ def extrato():
                 print(f"Categoria: {separar[1]}")
                 print(f"Valor: R${separar[2]}")
 
-###atualiacao nao funciona!!
+
+
 def atualizacao():
     global planilha
     extrato()
@@ -105,13 +115,12 @@ def atualizacao():
             armazena()
 
 
-# USAR ISSO PARA O CÓDIGO FINAL
 def calculandoSaldo():
     saldo = 0
     for transacao in planilha:
-        preco = transacao.get("valor")  # ???
-        if preco:
-            saldo += float(preco)  # ??????
+        preco = transacao.get("valor") #"valor" é a key
+        if preco!= "Valor": #value do cabecalho para key "valor" é "Valor"
+            saldo += float(preco)
 
     # Verificar se o saldo é maior ou igual a 0 e retornar com cor correspondente
     if saldo >= 0:
@@ -122,12 +131,8 @@ def calculandoSaldo():
     return saldoFinal
 
 
-# Carregar as transações existentes
+
 planilha = ler() #NAO ZERA A PLANILHA QUANDO VC ENCERRA O PROGRAMA E INICIA DE NOVO
-# transactions = read_transactions() #TA ERRADO ler()
-
-
-                                        #FALTA A FUNCAO APAGR TUDO!!!!!!!!
 
 
 # Criando um def para menu para não ficar muitas linhas de código no loop principal
@@ -156,31 +161,23 @@ while True:
     acao = input("\033[1m\nEscolha uma opção: ")
 
     if acao == "1":
-        # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
         adicao()
         input("\033[0;30m\nPressione Enter para continuar...")
 
     elif acao == "2":
-        # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
         extrato()
-        # list_all_transactions(transactions) VER SE PRECISA DISSO
         input("\033[0;30m\nPressione Enter para continuar...")
 
     elif acao == "3":
-        # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
         atualizacao()
-        # list_all_transactions(transactions) VER SE PRECISA DISSO
         input("\033[0;30m\nPressione Enter para continuar...")
 
     elif acao == "4":
-        # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
         extrato()
         delete()
-        # list_all_transactions(transactions) VER SE PRECISA DISSO
         input("\033[0;30m\nPressione Enter para continuar...")
 
     elif acao == "5":
-        # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
         zerar = input("\nVocê tem CERTEZA que deseja apagar TUDO? [S] ou [N]\n").upper()
         if zerar == "S":
             apagarTudo()
@@ -192,7 +189,6 @@ while True:
         input("\033[0;30m\nPressione Enter para continuar...")
     
     elif acao == "6":
-        # ler() Talvez não precise de nenhum desse ler() !!!!!!!!!!!!!!!!
         print(f"Saldo Atual: {calculandoSaldo()}")
         input("\033[0;30m\nPressione Enter para continuar...")
 
