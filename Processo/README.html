@@ -1,6 +1,6 @@
 <h1>Sistema de Rastreamento de Despesas Pessoais</h1>
 
-<h3>Bem-vindo ao nosso <b>Sistema de Rastreamento de Despesas Pessoais!</b>Nosso projeto tem como objetivo auxiliar no controle e acompanhamento de suas despesas pessoais. Com ele, você poderá adicionar, listar, atualizar e excluir transações financeiras, além de obter um extrato de suas despesas por categoria e verificar o saldo atual.</h3>
+<p>Nosso projeto tem como objetivo auxiliar no controle e acompanhamento de suas despesas pessoais. Com ele, você poderá adicionar, listar, atualizar e excluir transações financeiras, além de obter um extrato de suas despesas por categoria e verificar o saldo atual.</p>
 
 <h2>Requisitos</h2>
 <p>Para utilizar este sistema, você precisará apenas de um <b>computador</b></p>
@@ -50,8 +50,4 @@
         <li>Agora você está pronto para utilizar o nosso Sistema de Rastreamento de Despesas Pessoais! Aproveite as funcionalidades oferecidas para controlar suas finanças de forma mais eficiente. Caso tenha alguma dúvida ou encontre algum problema, sinta-se à vontade para entrar em contato conosco.</li>
         <li><b>Tenha um bom controle de suas despesas!</b></li>
     </ul>
-
-
-
-  
   
