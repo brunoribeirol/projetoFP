@@ -6,7 +6,7 @@ https://www.alura.com.br/artigos/escrever-bom-readme
   Nosso projeto consiste em um sistema de Rastreamento de Despesas Pessoais.
   Para usufruir do nosso sistema você precisa de alguns artefatos, são eles:
   <li>
-    <li><p>Um computador</p></li>
+    <li>Um computador</li>
     <li>Criar o arquivo</li>
     <li>Baixar o VSCode</li>
   </li>
