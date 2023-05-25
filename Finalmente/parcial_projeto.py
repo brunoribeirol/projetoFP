@@ -147,7 +147,7 @@ def extratoCategoria():
                     total_despesas += transacao["valor"]
 
             print(f"\nTotal de despesas na categoria '{categoria}': R${total_despesas:.2f}")
-            cont+=1
+            
             break  # Saímos do loop se não ocorrerem erros
         except Exception as e:
             print("Ocorreu um erro:", str(e))
