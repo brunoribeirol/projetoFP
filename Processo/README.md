@@ -1,17 +1,15 @@
 https://www.alura.com.br/artigos/escrever-bom-readme
 
-<h1>Seja bem vindo!</h1>
 
-<h2>
-  Nosso projeto consiste em um sistema de Rastreamento de Despesas Pessoais.
-  Para usufruir do nosso sistema você precisa de alguns artefatos, são eles:
-    <li>Um computador</li>
-    <li>
-      <li>Criar o arquivo</li>
-      <li>Baixar o VSCode</li>
-    </li>
-</h2>
+Sistema de Rastreamento de Despesas Pessoais
+Bem-vindo ao Sistema de Rastreamento de Despesas Pessoais! Este projeto tem como objetivo auxiliar no controle e acompanhamento de suas despesas pessoais. Com ele, você poderá adicionar, listar, atualizar e excluir transações financeiras, além de obter um extrato de suas despesas por categoria e verificar o saldo atual.
 
+Requisitos
+Para utilizar este sistema, você precisará dos seguintes requisitos:
 
+Um computador com acesso à internet.
+Ter o VSCode (Visual Studio Code) instalado em seu computador.
+Instruções de Uso
+Siga as instruções abaixo para configurar e utilizar o Sistema de Rastreamento de Despesas Pessoais:
 
 
