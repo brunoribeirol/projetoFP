@@ -13,8 +13,9 @@
         <li>Baixe o VSCode no seu computador (instale caso não tenha baixado).</li>
         <li>Certifique-se que você possui o Python instalado em seu computador</li>
         <li>Abra a pasta do repositório do seu computador no VSCode</li>
-        <li>Copie o path do arquivo transacoes.csv (o qual estará dentro da pasta quando você clonou o repositório) e cole dentro de todas as linhas que tiver with open</li>
         <li>Execute o programa selecionando a opção "Run" no menu superior do VSCode</li>
+        <li>Copie o path(caminho) do arquivo transacoes.csv (o qual estará dentro da pasta quando você clonou o repositório)</li>
+        <li>Em seguida, cole o path quando o programa pedir</li>
         <li>Você será apresentado ao menu principal do sistema, onde poderá escolher como:
             <ol>
             <li>Adicionar Transação</li>
