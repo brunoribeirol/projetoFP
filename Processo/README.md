@@ -41,8 +41,8 @@
 <h2>Contribuintes</h2>
     <ul>
         <li><a href="https://github.com/brunoribeirol">Bruno Ribeiro</a></li>
-        <li><a href="https://github.com/vinipetribu">Vinicius Petribu</a></li>
-        <li><a href="https://github.com/VIESAFE">Vinicius Ferraz</a></li>
+        <li><a href="https://github.com/vinipetribu">Vinícius Petribu</a></li>
+        <li><a href="https://github.com/VIESAFE">Vinícius Ferraz</a></li>
     </ul>
 
 <h2>Conclusão</h2>
