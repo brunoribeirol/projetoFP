@@ -46,10 +46,7 @@
 
 <h2>Contribuintes</h2>
     <ul>
-        <li><a href="https://github.com/brunoribeirol">GitHub Bruno</a></li>
-        <li><a href="https://github.com/vinipetribu">GitHub Vini</a></li>
-        <li><a href="https://github.com/VIESAFE">GitHub Ferraz</a></li>
+        <li><a href="https://github.com/brunoribeirol">Bruno Ribeiro</a></li>
+        <li><a href="https://github.com/vinipetribu">Vinicius Petribu</a></li>
+        <li><a href="https://github.com/VIESAFE">Vinicius Ferraz</a></li>
     </ul>
-
-  
-  
