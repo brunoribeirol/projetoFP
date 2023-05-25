@@ -9,13 +9,10 @@ https://www.alura.com.br/artigos/escrever-bom-readme
 <h2>Requisitos</h2>
 <p>Para utilizar este sistema, você precisará dos seguintes requisitos:</p>
 
-<li>
   <ul>
     <ul>Um computador</ul>
     <ul>Ter o VSCode (Visual Studio Code) instalado em seu computador.</ul>
   </ul>
-  
-</li>
 
 
 Instruções de Uso
