@@ -43,3 +43,13 @@
         <li>Agora você está pronto para utilizar o nosso Sistema de Rastreamento de Despesas Pessoais! Aproveite as funcionalidades oferecidas para controlar suas finanças de forma mais eficiente. Caso tenha alguma dúvida ou encontre algum problema, sinta-se à vontade para entrar em contato conosco.</li>
         <li><b>Tenha um bom controle de suas despesas!</b></li>
     </ul>
+
+<h2>Contribuintes</h2>
+    <ul>
+        <li><a href="https://github.com/brunoribeirol">GitHub Bruno</a></li>
+        <li><a href="https://github.com/vinipetribu">GitHub Vini</a></li>
+        <li><a href="https://github.com/VIESAFE">GitHub Ferraz</a></li>
+    </ul>
+
+  
+  
