@@ -2,8 +2,6 @@ https://www.alura.com.br/artigos/escrever-bom-readme
 
 <h1>Seja bem vindo!</h1>
 
-<br>
-
 <h2>Nosso projeto consiste em um sistema de Rastreamento de Despesas Pessoais.</h2>
 
 
