@@ -38,15 +38,15 @@
         <li>Caso deseje reiniciar o sistema e apagar todas as transações, você pode selecionar a opção Apagar TODAS as Transações", no menu principal</li>
     </ul>
 
-<h2>Conclusão</h2>
-    <ul>
-        <li>Agora você está pronto para utilizar o nosso Sistema de Rastreamento de Despesas Pessoais! Aproveite as funcionalidades oferecidas para controlar suas finanças de forma mais eficiente. Caso tenha alguma dúvida ou encontre algum problema, sinta-se à vontade para entrar em contato conosco.</li>
-        <li><b>Tenha um bom controle de suas despesas!</b></li>
-    </ul>
-
-<h2>Contribuintes</h2>
+    <h2>Contribuintes</h2>
     <ul>
         <li><a href="https://github.com/brunoribeirol">Bruno Ribeiro</a></li>
         <li><a href="https://github.com/vinipetribu">Vinicius Petribu</a></li>
         <li><a href="https://github.com/VIESAFE">Vinicius Ferraz</a></li>
+    </ul>
+    
+<h2>Conclusão</h2>
+    <ul>
+        <li>Agora você está pronto para utilizar o nosso Sistema de Rastreamento de Despesas Pessoais! Aproveite as funcionalidades oferecidas para controlar suas finanças de forma mais eficiente. Caso tenha alguma dúvida ou encontre algum problema, sinta-se à vontade para entrar em contato conosco.</li>
+        <li><b>Tenha um bom controle de suas despesas!</b></li>
     </ul>
