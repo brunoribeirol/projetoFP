@@ -11,7 +11,10 @@ https://www.alura.com.br/artigos/escrever-bom-readme
 
   <ul>
     <ul>Um computador</ul>
-    <ul>Ter o VSCode (Visual Studio Code) instalado em seu computador.</ul>
+    <ul>Ter o VSCode no seu computador (instale caso não tenha baixado).</ul>
+    <ul>Criar um arquivo .csv</ul>
+    <ul>Copiar o código que você pode consultar nesse repositório</ul>
+    <ul>Copiar o path do arquivo .csv que você criou e colar dentro de todas as linhas que tiver with open</ul>
   </ul>
 
 
