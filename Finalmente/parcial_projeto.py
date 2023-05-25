@@ -6,8 +6,10 @@ transacao={}
 
 def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
-saudacao = print('Seja bem vindo ao Rastreador de Despesas Pessoais.')
-path = input('Por favor, insira o caminho para o arquivo.csv criado.')
+
+print('\nSeja bem vindo ao Rastreador de Despesas Pessoais.')
+path = input('Por favor, insira o caminho para o arquivo.csv criado.\n')
+
 def ler():
     global planilha
     try:
@@ -22,7 +24,6 @@ def ler():
 
     return planilha
 
-
 def armazena():
     global planilha
     with open(path, "w+", encoding='utf-8') as file:
@@ -33,16 +34,15 @@ def armazena():
                 linha = ",".join(itens)
             file.write(linha+"\n")
 
-
 def adicao():
     print("***Adicionar nova transação***")
-    cont = 0
     with open(path, "w") as file:
-        while cont < 1:
-            sinal = input("A transação foi receita ou gasto? [R] ou [G]\n").upper()
+        while True:
             try:
+                sinal = input("A transação foi receita ou gasto? [R] ou [G]\n").upper()
                 if sinal != "G" and sinal != "R":
-                    raise ValueError("Opção inválida, tente novamente")
+                    print("Opção inválida, tente novamente")
+                    continue
 
                 nome = str(input("Nome: ")).title()
                 categoria = str(input("Categoria: ")).title()
@@ -55,35 +55,32 @@ def adicao():
                 transacao = {"nome": nome, "categoria": categoria, "valor": valor}
                 planilha.append(transacao)
                 armazena()
-                cont+=1
+                
             except ValueError as e:
                 print("Erro:", str(e))
                 print("Digite uma opção válida.")
-                
-
-############ NÃO CONSEGUI CRIAR EXCEÇÃO PRA SE COLOCAREM O NOME COMO NÚMERO #############
+            break
 
 def delete():
     print("***Apagar transação existente***")
-    cont = 0 
     with open(path, "r") as file:
-        while cont < 1:
+        while True:
             try:
                 opcao = int(input('Digite o número da transação que deseja apagar: '))
                 if opcao < 0 or opcao >= len(planilha):
-                    raise IndexError("Transação não existe")
-                break  # Transação válida, sair do loop
+                    print("Transação não existe")
+                    continue
             except ValueError:
                 print("Digite um número válido.")
+                continue
             except IndexError as e:
                 print("Erro:", str(e))
                 print("A transação não existe.")
-        
+            break
         for i in range(len(planilha)):
             if i == opcao:
                 planilha.pop(opcao)
         armazena() 
-        cont+=1
                 
 def apagarTudo():
     print("***Limpar TODAS as transações***")
@@ -93,7 +90,6 @@ def apagarTudo():
             if i != opcao:
                 planilha.pop(opcao)
         armazena()  
-
 
 def extrato():
     tabela = []
@@ -187,7 +183,7 @@ def atualizacao():
                 armazena()
                 cont+=1
             else:
-                novo_valor = input("Digite a atualização: ")
+                novo_valor = input("Digite a atualização: ").title()
                 planilha[nmr_transacao + 1][opcao] = novo_valor
                 print("Transação atualizada.")
                 armazena()
