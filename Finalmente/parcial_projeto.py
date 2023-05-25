@@ -109,8 +109,8 @@ def extrato():
 
 def transacoesCategoria():
     print("***Listar Transações por Categoria***")
-    cont = 0
-    while cont < 1:
+    
+    while True:
         try:
             categoria = input("Digite a categoria desejada: ").title()
 
@@ -125,7 +125,7 @@ def transacoesCategoria():
                     print(f"\nTransação {i}:")
                     print(f"Nome: {transacao['nome']}")
                     print(f"Valor: R${transacao['valor']}")
-                cont += 1
+                
                 break  # Transações encontradas, sair do loop
             else:
                 raise ValueError(f"Nenhuma transação encontrada na categoria '{categoria}'")
@@ -136,8 +136,8 @@ def transacoesCategoria():
 
 def extratoCategoria():
     print("***Extrato de Despesas por Categoria***")
-    cont = 0
-    while cont < 1:
+    
+    while True:
         try:
             categoria = input("Digite a categoria desejada: ").title()
 
@@ -157,8 +157,8 @@ def extratoCategoria():
 def atualizacao():
     global planilha
     extrato()
-    cont = 0
-    while cont < 1:
+    
+    while True:
         try:
             nmr_transacao = int(input("Digite o número da transação que deseja atualizar: ")) - 1
             if nmr_transacao < 0 or nmr_transacao >= len(planilha[1:]):
@@ -181,13 +181,13 @@ def atualizacao():
                 planilha[nmr_transacao + 1][opcao] = novo_valor
                 print("Transação atualizada.")
                 armazena()
-                cont+=1
+                break
             else:
                 novo_valor = input("Digite a atualização: ").title()
                 planilha[nmr_transacao + 1][opcao] = novo_valor
                 print("Transação atualizada.")
                 armazena()
-                cont+=1
+                break
         except ValueError:
             print("Opção inválida, tente novamente.")
 
